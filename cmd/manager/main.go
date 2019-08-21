@@ -13,6 +13,8 @@ import (
 	"github.com/redhat-cop/sandbox-manager/pkg/apis"
 	"github.com/redhat-cop/sandbox-manager/pkg/controller"
 
+	authv1 "github.com/openshift/api/authorization/v1"
+	userv1 "github.com/openshift/api/user/v1"
 	"github.com/operator-framework/operator-sdk/pkg/k8sutil"
 	"github.com/operator-framework/operator-sdk/pkg/leader"
 	"github.com/operator-framework/operator-sdk/pkg/log/zap"
@@ -99,6 +101,18 @@ func main() {
 
 	// Setup Scheme for all resources
 	if err := apis.AddToScheme(mgr.GetScheme()); err != nil {
+		log.Error(err, "")
+		os.Exit(1)
+	}
+
+	// Add User to Scheme
+	if err := userv1.AddToScheme(mgr.GetScheme()); err != nil {
+		log.Error(err, "")
+		os.Exit(1)
+	}
+
+	// Add Auth to Scheme
+	if err := authv1.AddToScheme(mgr.GetScheme()); err != nil {
 		log.Error(err, "")
 		os.Exit(1)
 	}

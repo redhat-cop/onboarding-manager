@@ -1,41 +1,22 @@
-kind: Role
+kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: sandbox-manager
 rules:
 - apiGroups:
   - ""
+  - user.openshift.io/v1
   resources:
-  - pods
-  - services
-  - endpoints
-  - persistentvolumeclaims
-  - events
-  - configmaps
-  - secrets
+  - users
   verbs:
-  - "*"
+  - list
+  - get
 - apiGroups:
-  - apps
+  - ""
+  - authorization.openshift.io/v1
   resources:
-  - deployments
-  - daemonsets
-  - replicasets
-  - statefulsets
+  - namespaces
+  - rolebindings
   verbs:
-  - "*"
-- apiGroups:
-  - monitoring.coreos.com
-  resources:
-  - servicemonitors
-  verbs:
-  - "get"
-  - "create"
-- apiGroups:
-  - apps
-  resources:
-  - deployments/finalizers
-  resourceNames:
-  - sandbox-manager
-  verbs:
-  - "update"
+  - get
+  - create
