@@ -27,6 +27,7 @@ rules:
   - list
   - create
   - update
+  - watch
 - apiGroups:
   - authorization.openshift.io/v1
   - rbac.authorization.k8s.io
