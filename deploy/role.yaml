@@ -5,18 +5,74 @@ metadata:
 rules:
 - apiGroups:
   - ""
-  - user.openshift.io/v1
+  - user.openshift.io
+  attributeRestrictions: null
   resources:
+  - groups
+  - identities
+  - useridentitymappings
   - users
+  - users/finalizers
   verbs:
-  - list
   - get
+  - list
+  - watch
+  - update
 - apiGroups:
   - ""
-  - authorization.openshift.io/v1
   resources:
   - namespaces
-  - rolebindings
   verbs:
   - get
+  - list
   - create
+  - update
+- apiGroups:
+  - authorization.openshift.io/v1
+  - rbac.authorization.k8s.io
+  resources:
+  - rolebindings
+  verbs:
+  - create
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: sandbox-manager
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - services
+  - endpoints
+  - persistentvolumeclaims
+  - events
+  - configmaps
+  - secrets
+  verbs:
+  - "*"
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  - daemonsets
+  - replicasets
+  - statefulsets
+  verbs:
+  - "*"
+- apiGroups:
+  - monitoring.coreos.com
+  resources:
+  - servicemonitors
+  verbs:
+  - "get"
+  - "create"
+- apiGroups:
+  - apps
+  resources:
+  - deployments/finalizers
+  resourceNames:
+  - sandbox-manager
+  verbs:
+  - "update"

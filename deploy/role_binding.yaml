@@ -10,3 +10,17 @@ roleRef:
   kind: ClusterRole
   name: sandbox-manager
   apiGroup: rbac.authorization.k8s.io
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: sandbox-manager
+  namespace: sandbox-manager
+subjects:
+- kind: ServiceAccount
+  name: sandbox-manager
+  namespace: sandbox-manager
+roleRef:
+  kind: Role
+  name: sandbox-manager
+  apiGroup: rbac.authorization.k8s.io
