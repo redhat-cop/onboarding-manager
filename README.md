@@ -7,6 +7,7 @@ In most real world use cases, its difficult for administrators to allow develope
 ## Features
 
 - [Personal Sandboxes for all Users](#personal-sandboxes-for-all-users)
+- [Automatic Cleanup of Old Sandboxes](#automatic-cleanup-of-old-sandboxes)
 
 ### Personal Sanboxes for all Users
 
@@ -32,6 +33,10 @@ If the project is deleted, Onboarding Manager will automatically recreate it.
     You have access to the following projects and can switch between them with 'oc project <projectname>':
 
     esauer-sbx
+
+### Automatic Cleanup of Old Sandboxes
+
+Onboarding Manager automatically cleans up Sandbox projects as they get old. This is done via a separate `CronJob` which, by default, runs **once an hour** and cleans up all projects with the `env=sandbox` label that are **older than 30 days**. These settings can all be changed by editing [deploy/cleanup-cronjob.yaml](deploy/cleanup-cronjob.yaml).
 
 ## Deployment
 
