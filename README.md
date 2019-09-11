@@ -6,14 +6,19 @@ In most real world use cases, its difficult for administrators to allow develope
 
 ## Features
 
-- Personal Sandboxes for all Users
+- [Personal Sandboxes for all Users](#personal-sandboxes-for-all-users)
 
 ### Personal Sanboxes for all Users
 
-When a user logs in to OpenShift, Onboarding Manager creates a sandbox project for that user to use.
+When a user logs in to OpenShift, Onboarding Manager creates a sandbox project for that user to use. This feature keys off of the `User` resource in OpenShift.
 
     $ oc whoami
     esauer
+    $ oc get users
+    NAME         UID                                    FULL NAME            IDENTITIES
+    ...
+    esauer       c5256c56-a3cd-11e9-a5af-fa163ef11dde   Eric Sauer           paas_ldap_provider:uid=esauer,cn=users,cn=accounts,dc=example,dc=com
+    ...
     $ oc get projects
     $ oc projects
     You have access to the following projects and can switch between them with 'oc project <projectname>':
