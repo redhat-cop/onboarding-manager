@@ -1,0 +1,23 @@
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: sandbox-cleanup
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: cleanup
+            image: registry.redhat.io/openshift4/ose-cli:4.1
+            args:
+            - /bin/bash
+            - -c
+            - date; oc whoami; echo "Looking for Projects older than ${CLEANUP_AGE} to clean up..."; projects=$(oc get namespaces -l env=sandbox -o jsonpath='{range .items[*]}{.metadata.name}{";"}{.metadata.creationTimestamp}{"\n"}{end}'); echo $projects; for project in $projects; do project_age=$(date -d ${project//*;/} +%s); cleanup_age=$(date -d "${CLEANUP_AGE} ago" +%s); echo "${project//;*/} - ${project_age}"; if [ $project_age -lt $cleanup_age ]; then echo "Cleaning up project ${project//;*/}"; oc delete ns ${project//;*/}; fi; done
+            env:
+              - name: CLEANUP_AGE
+                value: 30 days
+          restartPolicy: Never
+          serviceAccount: sandbox-manager
