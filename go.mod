@@ -1,4 +1,4 @@
-module github.com/redhat-cop/sandbox-manager
+module github.com/redhat-cop/onboarding-manager
 
 require (
 	contrib.go.opencensus.io/exporter/ocagent v0.4.9 // indirect

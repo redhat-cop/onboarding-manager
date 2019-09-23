@@ -10,8 +10,8 @@ import (
 	// Import all Kubernetes client auth plugins (e.g. Azure, GCP, OIDC, etc.)
 	_ "k8s.io/client-go/plugin/pkg/client/auth"
 
-	"github.com/redhat-cop/sandbox-manager/pkg/apis"
-	"github.com/redhat-cop/sandbox-manager/pkg/controller"
+	"github.com/redhat-cop/onboarding-manager/pkg/apis"
+	"github.com/redhat-cop/onboarding-manager/pkg/controller"
 
 	authv1 "github.com/openshift/api/authorization/v1"
 	userv1 "github.com/openshift/api/user/v1"

@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"github.com/redhat-cop/sandbox-manager/pkg/controller/user"
+	"github.com/redhat-cop/onboarding-manager/pkg/controller/user"
 )
 
 func init() {

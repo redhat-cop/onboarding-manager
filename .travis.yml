@@ -1,0 +1,25 @@
+sudo: required
+language: go
+go_import_path: github.com/redhat-cop/onboarding-manager
+go:
+- "1.12"
+env:
+
+before_install:
+- go mod vendor
+
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: make travis-latest-deploy
+    on:
+      repo: redhat-cop/onboarding-manager
+      branch: master
+      tags: false
+  - provider: script
+    skip_cleanup: true
+    script: make travis-release-deploy
+    on:
+      repo: redhat-cop/onboarding-manager
+      branch: master
+      tags: true
