@@ -7,7 +7,7 @@ env:
 - GO111MODULE=on
 
 before_install:
-- go mod vendor
+- travis_retry go mod vendor
 
 deploy:
   - provider: script
