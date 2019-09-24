@@ -80,7 +80,7 @@ func main() {
 	ctx := context.TODO()
 
 	// Become the leader before proceeding
-	err = leader.Become(ctx, "sandbox-manager-lock")
+	err = leader.Become(ctx, "onboarding-manager-lock")
 	if err != nil {
 		log.Error(err, "")
 		os.Exit(1)

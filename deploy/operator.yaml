@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sandbox-manager
+  name: onboarding-manager
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: sandbox-manager
+      name: onboarding-manager
   template:
     metadata:
       labels:
-        name: sandbox-manager
+        name: onboarding-manager
     spec:
-      serviceAccountName: sandbox-manager
+      serviceAccountName: onboarding-manager
       containers:
-        - name: sandbox-manager
+        - name: onboarding-manager
           # Replace this with the built image name
-          image: quay.io/etsauer/sandbox-manager
+          image: quay.io/etsauer/onboarding-manager
           command:
-          - sandbox-manager
+          - onboarding-manager
           imagePullPolicy: Always
           env:
             - name: WATCH_NAMESPACE
@@ -28,4 +28,4 @@ spec:
                 fieldRef:
                   fieldPath: metadata.name
             - name: OPERATOR_NAME
-              value: "sandbox-manager"
+              value: "onboarding-manager"

@@ -20,4 +20,4 @@ spec:
               - name: CLEANUP_AGE
                 value: 30 days
           restartPolicy: Never
-          serviceAccount: sandbox-manager
+          serviceAccount: onboarding-manager
