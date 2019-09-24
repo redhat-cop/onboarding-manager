@@ -1,11 +1,11 @@
 FROM registry.access.redhat.com/ubi7/ubi-minimal:latest
 
-ENV OPERATOR=/usr/local/bin/sandbox-manager \
+ENV OPERATOR=/usr/local/bin/onboarding-operator \
     USER_UID=1001 \
     USER_NAME=sandbox-manager
 
 # install operator binary
-COPY build/_output/bin/sandbox-manager ${OPERATOR}
+COPY build/_output/bin/onboarding-operator ${OPERATOR}
 
 COPY build/bin /usr/local/bin
 RUN  /usr/local/bin/user_setup
