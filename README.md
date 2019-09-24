@@ -44,11 +44,11 @@ Creates sandbox projects for users.
 
 Deploying the operator can be done by running:
 
-    oc new-project sandbox-manager
+    oc new-project onboarding-manager
     oc apply -f deploy/
 
 ## Building
 
 Building the operator is also very simple.
 
-    operator-sdk build quay.io/etsauer/sandbox-manager
+    operator-sdk build quay.io/redhat-cop/onboarding-manager
