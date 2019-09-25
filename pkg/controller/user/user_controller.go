@@ -3,9 +3,9 @@ package user
 import (
 	"context"
 
-	authv1 "github.com/openshift/api/authorization/v1"
 	userv1 "github.com/openshift/api/user/v1"
 	corev1 "k8s.io/api/core/v1"
+	rbacv1 "k8s.io/api/rbac/v1"
 	"k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -154,17 +154,18 @@ func newNamespaceForUser(cr *userv1.User) *corev1.Namespace {
 }
 
 // newPodForCR returns a busybox pod with the same name/namespace as the cr
-func newRoleBindingForUser(cr *userv1.User) *authv1.RoleBinding {
-	return &authv1.RoleBinding{
+func newRoleBindingForUser(cr *userv1.User) *rbacv1.RoleBinding {
+	return &rbacv1.RoleBinding{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      "admin",
 			Namespace: cr.Name + "-sbx",
 		},
-		RoleRef: corev1.ObjectReference{
+		RoleRef: rbacv1.RoleRef{
+			Kind: "ClusterRole",
 			Name: "admin",
 		},
-		Subjects: []corev1.ObjectReference{
-			corev1.ObjectReference{
+		Subjects: []rbacv1.Subject{
+			rbacv1.Subject{
 				Kind: "User",
 				Name: cr.Name,
 			},

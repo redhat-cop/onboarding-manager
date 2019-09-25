@@ -16,7 +16,7 @@ spec:
       containers:
         - name: onboarding-manager
           # Replace this with the built image name
-          image: quay.io/etsauer/onboarding-manager
+          image: quay.io/redhat-cop/onboarding-manager
           command:
           - onboarding-manager
           imagePullPolicy: Always
