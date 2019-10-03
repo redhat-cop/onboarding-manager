@@ -2,6 +2,7 @@ package user
 
 import (
 	"context"
+	"strings"
 
 	userv1 "github.com/openshift/api/user/v1"
 	corev1 "k8s.io/api/core/v1"
