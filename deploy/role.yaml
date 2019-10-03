@@ -30,12 +30,21 @@ rules:
   - watch
   - delete
 - apiGroups:
-  - authorization.openshift.io/v1
   - rbac.authorization.k8s.io
   resources:
   - rolebindings
   verbs:
   - create
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resources:
+  - clusterroles
+  verbs:
+  - bind
+  resourceNames:
+  - admin
+  - edit
+  - view
 ---
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
