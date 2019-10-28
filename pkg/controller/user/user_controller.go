@@ -2,6 +2,7 @@ package user
 
 import (
 	"context"
+	"strings"
 
 	userv1 "github.com/openshift/api/user/v1"
 	corev1 "k8s.io/api/core/v1"
@@ -146,7 +147,7 @@ func newNamespaceForUser(cr *userv1.User) *corev1.Namespace {
 	}
 	return &corev1.Namespace{
 		ObjectMeta: metav1.ObjectMeta{
-			Name:        cr.Name + "-sbx",
+			Name:        strings.ToLower(cr.Name) + "-sbx",
 			Labels:      labels,
 			Annotations: annotations,
 		},
@@ -158,7 +159,7 @@ func newRoleBindingForUser(cr *userv1.User) *rbacv1.RoleBinding {
 	return &rbacv1.RoleBinding{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      "admin",
-			Namespace: cr.Name + "-sbx",
+			Namespace: strings.ToLower(cr.Name) + "-sbx",
 		},
 		RoleRef: rbacv1.RoleRef{
 			Kind: "ClusterRole",
